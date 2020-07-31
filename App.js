@@ -22,6 +22,7 @@ const App = () => {
     } else {
       resetError();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [capital, interes, meses]);
 
   const calcular = () => {

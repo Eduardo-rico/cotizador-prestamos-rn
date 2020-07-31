@@ -129,7 +129,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.cotizador"
+        applicationId "com.ricosotomayor.cotizadordeprestamos"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

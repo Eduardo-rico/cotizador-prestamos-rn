@@ -40,18 +40,18 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   boxResult: {
-    padding: 30,
+    padding: 25,
   },
   title: {
-    fontSize: 30,
+    fontSize: 25,
     textAlign: 'center',
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: 10,
   },
   valores: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 20,
+    marginBottom: 15,
   },
 });
 

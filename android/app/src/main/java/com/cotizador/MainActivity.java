@@ -1,4 +1,4 @@
-package com.cotizador;
+package com.ricosotomayor.cotizadordeprestamos;
 
 import com.facebook.react.ReactActivity;
 
