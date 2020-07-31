@@ -1,10 +1,11 @@
 import {Text, View, SafeAreaView, StyleSheet, StatusBar} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import colors from './src/utils/colors.js';
 
 import Form from './src/components/Form';
 import Footer from './src/components/Footer.js';
+import Resultado from './src/components/Resultado.js';
 
 // YellowBox.ignoreWarnings(["Picker has been extracted"]) por si quiero quitar los warnings
 
@@ -12,9 +13,39 @@ const App = () => {
   const [capital, guardarCapital] = useState(null);
   const [interes, guardarInteres] = useState(null);
   const [meses, guardarMeses] = useState(null);
+  const [total, guardarTotal] = useState({});
+  const [error, guardarError] = useState('');
+
+  useEffect(() => {
+    if (capital && interes && meses) {
+      calcular();
+    } else {
+      resetError();
+    }
+  }, [capital, interes, meses]);
 
   const calcular = () => {
+    resetError();
     console.log(`capital ${capital}, interes: ${interes} meses: ${meses}`);
+    if (!capital) {
+      guardarError('No dijiste cuanto dinero');
+    } else if (!interes) {
+      guardarError('no dijiste el interes');
+    } else if (!meses) {
+      guardarError('no dijiste los meses');
+    } else {
+      const i = interes / 100;
+      const fee = capital / ((1 - Math.pow(i + 1, -meses)) / i);
+      guardarTotal({
+        pagoMensual: fee.toFixed(2),
+        pagoTotal: (fee * meses).toFixed(2),
+      });
+    }
+  };
+
+  const resetError = () => {
+    guardarError(null);
+    guardarTotal({});
   };
 
   return (
@@ -29,9 +60,13 @@ const App = () => {
           guardarMeses={guardarMeses}
         />
       </SafeAreaView>
-      <View>
-        <Text>Hola</Text>
-      </View>
+      <Resultado
+        capital={capital}
+        interes={interes}
+        meses={meses}
+        total={total}
+        error={error}
+      />
       <Footer calcular={calcular} />
     </>
   );
